@@ -13,25 +13,28 @@ public class Main {
         countOfHello(file, result);
     }
 
-    static void countOfHello(File file, File result) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(result));
-        String line = reader.readLine();
-        String[] words ;
-        int count = 0;
-        int l = 1;
-        while (line != null) {
-            words = line.split(" ");
-            for (String word :words) {
-                if(word.equals("Hello")) {
-                    count++;
+    static void countOfHello(File file, File result)  {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(result));) {
+            String line = reader.readLine();
+            String[] words;
+            int count = 0;
+            int l = 1;
+            while (line != null) {
+                words = line.split(" ");
+                for (String word : words) {
+                    if (word.equals("Hello")) {
+                        count++;
+                    }
                 }
+                writer.write("line" + Integer.toString(l) + "-" + Integer.toString(count) + "\n");
+                count = 0;
+                l++;
+                line = reader.readLine();
             }
-            writer.write("line" + Integer.toString(l)+"-"+Integer.toString(count)+"\n");
-            count = 0 ;
-            l++;
-            line = reader.readLine();
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        writer.flush();
     }
 }
