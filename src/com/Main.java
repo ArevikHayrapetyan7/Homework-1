@@ -102,6 +102,10 @@ public class Main {
                     }
                     break;
                 }
+                case default: {
+                   System.out.println("Please enter the correct command!");
+                   break;
+                }
             }
 
         }
