@@ -1,21 +1,14 @@
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-
 public class Main {
-   // static final int MAX_SIZE_WORDS = 100;
-
+    private static String SOURCE_PATH = "source.txt";
+    private static String RESULT_PATH = "result.txt";
     public static void main(String[] args) throws IOException {
-        File file = new File("source.txt");
-        file.createNewFile();
-        File result = new File("result.txt");
-        result.createNewFile();
-        countOfHello(file, result);
+        countOfHello(SOURCE_PATH, RESULT_PATH);
     }
 
-    static void countOfHello(File file, File result)  {
-        try (BufferedReader reader = new BufferedReader(new FileReader(file));
-             BufferedWriter writer = new BufferedWriter(new FileWriter(result));) {
+    static void countOfHello(String path, String result_path)  {
+        try (BufferedReader reader = new BufferedReader(new FileReader(path));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(result_path));) {
             String line = reader.readLine();
             String[] words;
             int count = 0;
@@ -32,7 +25,7 @@ public class Main {
                 l++;
                 line = reader.readLine();
             }
-            writer.flush();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
